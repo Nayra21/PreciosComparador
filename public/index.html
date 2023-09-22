@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <title>Comparador de Precios</title>
     <link rel="stylesheet" href="../public/css/style.css">
 
@@ -11,31 +14,37 @@
 <body>
     
     <article>
-        <section>
+        <section id="titulo">
             <h1>Comprador de Precios</h1>
         </section>
 
         <section>
-            <label for="nombre">Nombre del producto</label><br>
-            <input type="text" placeholder="Escribe el producto"><br>
-            <label for="precio">Precio del producto</label><br>
-            <input type="number" placeholder="Escribe su precio"><br>
-            <label for="comercio">Nombre del comercio</label><br>
-            <input type="text" placeholder="Escribe el comercio">
+            <div class="input">
+                <label for="nombre">Nombre del producto</label><br>
+                <input type="text" placeholder="Escribe el producto">
+            </div>
+            <div class="input">
+                <label for="precio">Precio del producto</label><br>
+                <input type="number" placeholder="Escribe su precio">
+            </div>
+            <div class="input">
+                <label for="comercio">Nombre del comercio</label><br>
+                <input type="text" placeholder="Escribe el comercio">
+            </div>
         </section>
 
-        <section>
+        <section id="button">
             <br>
             <button>Guardar Producto</button>
             <button>Listar Productos</button>
             <button>Productos más Baratos</button>
         </section>
 
-        <section>
+        <section id="lista">
             <h3>Listados de Productos:</h3>
         </section>
 
-        <section>
+        <section id="comparacion">
             <h3>Productos con menor precio:</h3>
         </section>
     </article>
