@@ -14,41 +14,30 @@
 <body>
     
     <article>
-        <section id="titulo">
-            <h1>Comprador de Precios</h1>
-        </section>
-
         <section>
-            <div class="input">
-                <label for="nombre">Nombre del producto</label><br>
-                <input type="text" placeholder="Escribe el producto">
-            </div>
-            <div class="input">
-                <label for="precio">Precio del producto</label><br>
-                <input type="number" placeholder="Escribe su precio">
-            </div>
-            <div class="input">
-                <label for="comercio">Nombre del comercio</label><br>
-                <input type="text" placeholder="Escribe el comercio">
-            </div>
+          <h1>Comparador de precios de supermercados</h1>
+          <form>
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" id="nombre" />
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" />
+            <label for="supermercado">Supermercado:</label>
+            <select id="supermercado">
+              <option value="Comodín">Comodín</option>
+              <option value="Vea">Vea</option>
+              <option value="Carrefour">Carrefour</option>
+              <option value="Día">Día</option>
+              <option value="Yahuar">Yahuar</option>
+            </select> 
+            <button type="button" onclick="agregarProducto()">Cargar</button>
+            <button type="button" onclick="compararPrecios()">Comparar Precios</button>
+          </form>
+          <h2>Lista de productos</h2>
+          <ul id="lista-de-productos"></ul>
+          <h2>Productos con menor precio</h2>
+          <ul id="lista-de-productos-baratos"></ul>
         </section>
-
-        <section id="button">
-            <br>
-            <button>Guardar Producto</button>
-            <button>Listar Productos</button>
-            <button>Productos más Baratos</button>
-        </section>
-
-        <section id="lista">
-            <h3>Listados de Productos:</h3>
-        </section>
-
-        <section id="comparacion">
-            <h3>Productos con menor precio:</h3>
-        </section>
-    </article>
-
+      </article>    
     <footer>
         <p>Grupo 4</p>
         <p>Facundo Vazquez, Exequiel Velazquez, Nayra Navia, Franco flores</p>
