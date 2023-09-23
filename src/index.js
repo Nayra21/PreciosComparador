@@ -1,75 +1,63 @@
+// Array para almacenar los productos
+let productos = [];
+let productosBaratos = [];
 
-const productos = [];
+// Función para agregar un producto al array
+function agregarProducto() {
 
+  // Obtener los valores del nombre, precio y supermercado desde el formulario
+  const nombre = document.getElementById('nombre').value;
+  const precio = parseFloat(document.getElementById('precio').value);
+  const supermercado = document.getElementById('supermercado').value;
 
-function guardarProducto() {
-    const nombreProducto = document.querySelector('input[type="text"]').value;
-    const precioProducto = parseFloat(document.querySelector('input[type="number"]').value);
-    const nombreComercio = document.querySelector('input[type="text"]').value;
+    // Verificar si los campos están completos y el precio es un número válido
+  if (nombre && !isNaN(precio) && supermercado) {
 
-
-    if (!nombreProducto || isNaN(precioProducto) || precioProducto <= 0) {
-        alert('Por favor, ingrese un nombre de producto válido y un precio válido.');
-        return;
-    }
-
-
+    // Crear un objeto producto y agregarlo al array de productos
     const producto = {
-        nombre: nombreProducto,
-        precio: precioProducto,
-        comercio: nombreComercio,
+      nombre: nombre,
+      precio: precio,
+      supermercado: supermercado,
     };
 
-   
     productos.push(producto);
 
-  
-    document.querySelector('input[type="text"]').value = '';
-    document.querySelector('input[type="number"]').value = '';
+    // Crear un elemento <li> para mostrar la información del producto y agregarlo a la lista de productos
+    const elementoDeListaDeProductos = document.createElement('li');
+    elementoDeListaDeProductos.textContent = `${nombre} - ${precio} - ${supermercado}`;
+    document.getElementById('lista-de-productos').appendChild(elementoDeListaDeProductos);
 
-    
-    alert('Producto guardado con éxito.');
+    // Limpiar los campos de entrada
+    document.getElementById('nombre').value = '';
+    document.getElementById('precio').value = '';
+    document.getElementById('supermercado').value = '';
+
+    alert('Producto agregado exitosamente.');
+  } else {
+    alert('Por favor, complete todos los campos correctamente.');
+  }
 }
 
+// Función para comparar precios
+function compararPrecios() {
+  if (productos.length > 0) {
+    productosBaratos = [];
 
-function listarProductos() {
-    const listaProductos = document.getElementById('lista');
-    listaProductos.innerHTML = '<h3>Listado de Productos:</h3>';
+    for (const producto of productos) {
+      const productoExistente = productosBaratos.find(p => p.nombre === producto.nombre);
 
-    if (productos.length === 0) {
-        listaProductos.innerHTML += '<p>No hay productos guardados.</p>';
-    } else {
-        const ul = document.createElement('ul');
-        productos.forEach((producto) => {
-            const li = document.createElement('li');
-            li.textContent = `Nombre: ${producto.nombre}, Precio: $${producto.precio.toFixed(2)}, Comercio: ${producto.comercio}`;
-            ul.appendChild(li);
-        });
-        listaProductos.appendChild(ul);
+      if (!productoExistente || producto.precio < productoExistente.precio) {
+        productosBaratos = productosBaratos.filter(p => p.nombre !== producto.nombre);
+        productosBaratos.push(producto);
+      }
     }
-}
 
-
-function productosMasBaratos() {
-    const comparacionProductos = document.getElementById('comparacion');
-    comparacionProductos.innerHTML = '<h3>Productos más Baratos:</h3>';
-
-    if (productos.length === 0) {
-        comparacionProductos.innerHTML += '<p>No hay productos guardados.</p>';
-    } else {
-      
-        const productosOrdenados = [...productos].sort((a, b) => a.precio - b.precio);
-
-        const ul = document.createElement('ul');
-        productosOrdenados.slice(0, 5).forEach((producto) => {
-            const li = document.createElement('li');
-            li.textContent = `Nombre: ${producto.nombre}, Precio: $${producto.precio.toFixed(2)}, Comercio: ${producto.comercio}`;
-            ul.appendChild(li);
-        });
-        comparacionProductos.appendChild(ul);
+    // Limpiar la lista de productos baratos y agregar los productos más baratos
+    document.getElementById('lista-de-productos-baratos').innerHTML = '';
+    for (const producto of productosBaratos) {
+      const elementoDeListaDeProductosBaratos = document.createElement('li');
+      elementoDeListaDeProductosBaratos.textContent = `${producto.nombre} - ${producto.precio} - ${producto.supermercado}`;
+      document.getElementById('lista-de-productos-baratos').appendChild(elementoDeListaDeProductosBaratos);
     }
+  }
 }
-
-document.querySelector('#button button:nth-child(1)').addEventListener('click', guardarProducto);
-document.querySelector('#button button:nth-child(2)').addEventListener('click', listarProductos);
-document.querySelector('#button button:nth-child(3)').addEventListener('click', productosMasBaratos);
